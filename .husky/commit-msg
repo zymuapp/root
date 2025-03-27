@@ -1,5 +1,6 @@
 # Reference: https://docs.zymu.app/contributing/commits
 
+echo ""
 echo "🐺 running commit message validation..."
 
 # Validate commit message
