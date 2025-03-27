@@ -18,7 +18,7 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}═════════════════[ branch validation ]═════════════════${NC}"
 echo ""
-echo -e "Branch: ${BLUE}$branchName${NC}"
+echo -e "branch: ${BLUE}$branchName${NC}"
 echo ""
 
 if [[ $branchName =~ $regex ]]; then

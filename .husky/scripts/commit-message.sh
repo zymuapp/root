@@ -153,11 +153,6 @@ else
   echo -e "${GREEN}✓${NC} 🔥 chore(cleanup): remove deprecated code"
   echo -e "${GREEN}✓${NC} 📚 docs: update readme file"
   echo ""
-  echo "available types:"
-  for t in "${types[@]}"; do
-    echo "  - $t"
-  done
-  echo ""
   echo -e "please check our contributing guidelines: ${BLUE}https://docs.zymu.app/contributing/commits${NC}"
   echo ""
   echo -e "your commit message was:"
