@@ -27,11 +27,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+      - name: Extract pnpm version
+        id: extract_pnpm_version
+        run: echo "::set-output name=pnpm_version::$(jq -r '.packageManager' package.json | cut -d'@' -f2)"
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
-          run_install: false
+          version: ${{ steps.extract_pnpm_version.outputs.pnpm_version }}
 
       - name: Get pnpm store directory
         shell: bash
