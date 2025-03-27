@@ -1,4 +1,4 @@
-import { Button } from "@zymu/ui/button"
+import { Button } from "@zymuapp/ui/button"
 import Image, { type ImageProps } from "next/image"
 import styles from "./page.module.css"
 

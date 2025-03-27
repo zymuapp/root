@@ -1,4 +1,4 @@
-# @zymu/biome-config
+# @zymuapp/biome-config
 
 ## 0.1.0
 

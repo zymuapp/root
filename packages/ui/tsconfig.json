@@ -1,5 +1,5 @@
 {
-    "extends": "@zymu/typescript-config/react-library.json",
+    "extends": "@zymuapp/typescript-config/react-library.json",
     "compilerOptions": {
         "outDir": "dist"
     },

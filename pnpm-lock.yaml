@@ -24,7 +24,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@zymu/ui':
+      '@zymuapp/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -49,10 +49,10 @@ importers:
       '@types/react-dom':
         specifier: 19.0.4
         version: 19.0.4(@types/react@19.0.10)
-      '@zymu/biome-config':
+      '@zymuapp/biome-config':
         specifier: workspace:*
         version: link:../../packages/biome-config
-      '@zymu/typescript-config':
+      '@zymuapp/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       typescript:
@@ -91,10 +91,10 @@ importers:
       '@types/react-dom':
         specifier: 19.0.4
         version: 19.0.4(@types/react@19.0.10)
-      '@zymu/biome-config':
+      '@zymuapp/biome-config':
         specifier: workspace:*
         version: link:../biome-config
-      '@zymu/typescript-config':
+      '@zymuapp/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       typescript:

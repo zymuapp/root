@@ -1,5 +1,5 @@
 {
-    "extends": "@zymu/typescript-config/nextjs.json",
+    "extends": "@zymuapp/typescript-config/nextjs.json",
     "compilerOptions": {
         "plugins": [
             {

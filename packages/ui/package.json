@@ -1,5 +1,5 @@
 {
-    "name": "@zymu/ui",
+    "name": "@zymuapp/ui",
     "version": "0.0.0",
     "private": true,
     "exports": {
@@ -19,8 +19,8 @@
         "@types/node": "^22.13.10",
         "@types/react": "19.0.10",
         "@types/react-dom": "19.0.4",
-        "@zymu/biome-config": "workspace:*",
-        "@zymu/typescript-config": "workspace:*",
+        "@zymuapp/biome-config": "workspace:*",
+        "@zymuapp/typescript-config": "workspace:*",
         "typescript": "5.8.2"
     },
     "dependencies": {

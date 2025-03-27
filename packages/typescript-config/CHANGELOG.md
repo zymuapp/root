@@ -1,4 +1,4 @@
-# @zymu/typescript-config
+# @zymuapp/typescript-config
 
 ## 0.1.0
 
