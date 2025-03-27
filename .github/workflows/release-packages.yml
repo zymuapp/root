@@ -12,8 +12,7 @@ concurrency:
 
 env:
   NODE_OPTIONS: "--max_old_space_size=6144"
-  PNPM_VERSION: "9.4.0"
-  NODE_VERSION: "20"
+  NODE_VERSION: "22"
 
 permissions:
   pull-requests: write
@@ -33,10 +32,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
+      - name: Extract pnpm version
+        id: extract_pnpm_version
+        run: echo "::set-output name=pnpm_version::$(jq -r '.packageManager' package.json | cut -d'@' -f2)"
+
+      - name: Use pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: ${{ env.PNPM_VERSION }}
+          version: ${{ steps.extract_pnpm_version.outputs.pnpm_version }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
