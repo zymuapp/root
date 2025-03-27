@@ -1,0 +1,30 @@
+{
+    "name": "@zymu/ui",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        "./*": "./src/*.tsx"
+    },
+    "scripts": {
+        "lint": "biome check .",
+        "format": "biome format .",
+        "lint:fix": "biome check --apply .",
+        "format:fix": "biome format --write .",
+        "generate:component": "turbo gen react-component",
+        "check-types": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@turbo/gen": "^2.4.4",
+        "@types/node": "^22.13.10",
+        "@types/react": "19.0.10",
+        "@types/react-dom": "19.0.4",
+        "@zymu/biome-config": "workspace:*",
+        "@zymu/typescript-config": "workspace:*",
+        "typescript": "5.8.2"
+    },
+    "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@zymu/biome-config",
+  "version": "1.0.0",
+  "description": "Biome configuration package",
+  "type": "module",
+  "exports": {
+    ".": "./config.json"
+  },
+  "peerDependencies": {
+    "@biomejs/biome": ">= 1.x.x"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
+}

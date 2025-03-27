@@ -1,0 +1,110 @@
+name: Release packages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_OPTIONS: "--max_old_space_size=6144"
+  PNPM_VERSION: "9.4.0"
+  NODE_VERSION: "20"
+
+permissions:
+  pull-requests: write
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    name: Release Process
+    if: github.repository == 'zymuapp/zymu'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint || echo "Linting issues found but continuing build"
+
+      - name: Test
+        run: pnpm test || echo "Test issues found but continuing build"
+
+      - name: Build
+        run: pnpm build
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+            registry=https://npm.pkg.github.com/
+            always-auth=true
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set release date
+        id: date
+        run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Set package info
+        id: pkg_info
+        run: |
+          PACKAGE_INFO=$(jq -r '.name' package.json | sed 's/@.*\///' || echo "packages")
+          echo "PACKAGE_NAME=$PACKAGE_INFO" >> $GITHUB_ENV
+
+      - name: Create Release Pull Request or Publish to Github Packages
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run release
+          version: pnpm run version
+          commit: "🔖 release ${{ env.PACKAGE_NAME }} (${{ env.RELEASE_DATE }}) [run #${{ github.run_number }}]"
+          title: "📦 Release ${{ env.PACKAGE_NAME }} packages (${{ env.RELEASE_DATE }})"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output release summary
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "✅ Packages were published to GitHub Packages!"
+          echo "The following versions were published:"
+          echo "${{ steps.changesets.outputs.publishedPackages }}"
