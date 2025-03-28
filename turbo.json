@@ -17,11 +17,20 @@
 				"loader.js"
 			]
 		},
+		"test": {
+			"dependsOn": ["^build"],
+			"outputs": []
+		},
+		"test:watch": {
+			"dependsOn": ["^build"],
+			"outputs": [],
+			"cache": false,
+			"persistent": true
+		},
 		"dev": {
 			"cache": false,
 			"persistent": true
 		},
-		"test": {},
 		"lint": {
 			"outputs": [],
 			"inputs": [

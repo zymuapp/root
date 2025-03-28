@@ -1,0 +1,3 @@
+{
+  "extends": "@zymuapp/typescript-config/nestjs.json"
+}

@@ -1,0 +1,32 @@
+{
+	"name": "@zymuapp/testing",
+	"version": "0.0.0",
+	"description": "@zymuapp's tools for testing",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zymuapp/root.git",
+		"directory": "packages/testing"
+	},
+	"bugs": {
+		"url": "https://github.com/zymuapp/root/issues"
+	},
+	"homepage": "https://docs.zymuapp.com/testing",
+	"license": "MIT",
+	"keywords": [],
+	"files": ["README.md"],
+	"exports": {
+		"./config": "./jest.config.js"
+	},
+	"scripts": {
+		"check-types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@types/jest": "^29.5.14",
+		"jest": "^29.7.0",
+		"ts-jest": "^29.3.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@zymuapp/biome-config": "workspace:*"
+	}
+}

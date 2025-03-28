@@ -34,6 +34,10 @@ export const auth = sdk((client) => ({
       connect: (params: Record<string, ParamValue>) =>
         throwsOAuth2NotBrowser(client, OAuthProvidersEnum.Tiktok, params),
     },
+    twitch: {
+      connect: (params: Record<string, ParamValue>) =>
+        throwsOAuth2NotBrowser(client, OAuthProvidersEnum.Twitch, params),
+    },
     twitter: {
       connect: (params: Record<string, ParamValue>) =>
         throwsOAuth2NotBrowser(client, OAuthProvidersEnum.Twitter, params),

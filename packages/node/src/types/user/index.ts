@@ -40,8 +40,8 @@ export type UserAddress = Location & {
 export interface UserCredentials {
   version: number;
   lastPassword: string;
-  passwordUpdatedAt: number;
-  updatedAt: number;
+  passwordUpdatedAt: Date;
+  updatedAt: Date;
 }
 
 export type UserSettings = {

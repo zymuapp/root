@@ -30,9 +30,10 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "biome check .",
-    "format": "biome format .",
     "lint:fix": "biome check --apply .",
+    "format": "biome format .",
     "format:fix": "biome format --write .",
     "check-types": "tsc --noEmit"
   },
@@ -51,9 +52,13 @@
     "@anatine/esbuild-decorators": "^0.2.19",
     "@biomejs/biome": "^1.9.4",
     "@turbo/gen": "^2.4.4",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.10",
     "@zymuapp/biome-config": "workspace:*",
+    "@zymuapp/testing": "workspace:*",
     "@zymuapp/typescript-config": "workspace:*",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.0",
     "typescript": "5.8.2"
   }
 }
