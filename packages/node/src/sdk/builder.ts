@@ -1,5 +1,5 @@
 import type { Client } from "../rest";
 
 export function sdk<T>(builder: (client: Client) => T) {
-	return builder;
+  return builder;
 }

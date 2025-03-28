@@ -2,13 +2,13 @@ import { Client, type ClientOptions } from "./rest";
 import { auth } from "./sdk";
 
 export class zymu {
-	readonly client: Client;
+  readonly client: Client;
 
-	readonly auth;
+  readonly auth;
 
-	constructor(options: ClientOptions) {
-		this.client = new Client(options);
+  constructor(options: ClientOptions) {
+    this.client = new Client(options);
 
-		this.auth = auth(this.client);
-	}
+    this.auth = auth(this.client);
+  }
 }
