@@ -9,7 +9,7 @@
 
   // - Actions on save
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "always"
+    "quickfix.biome": "never"
   },
 
   // - Lint and format
