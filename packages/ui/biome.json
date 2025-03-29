@@ -1,17 +1,11 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-    "extends": ["@zymuapp/biome-config"],
-    "linter": {
-        "rules": {
-            "style": {
-                "noNonNullAssertion": "off"
-            }
-        }
-    },
-    "formatter": {
-        "indentWidth": 4
-    },
-    "files": {
-        "ignore": ["dist/**", ".next/**"]
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "extends": ["@zymuapp/biome-config"],
+  "linter": {
+    "rules": {
+      "style": {
+        "noNonNullAssertion": "off"
+      }
     }
+  }
 }

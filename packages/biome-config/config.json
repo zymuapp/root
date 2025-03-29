@@ -8,10 +8,10 @@
   },
   "formatter": {
     "enabled": true,
+    "lineEnding": "lf",
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto"
   },
@@ -20,7 +20,7 @@
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",
       "trailingCommas": "all",
-      "semicolons": "asNeeded",
+      "semicolons": "always",
       "arrowParentheses": "always",
       "bracketSpacing": true,
       "bracketSameLine": false,
@@ -39,11 +39,15 @@
         "noUnusedImports": "error"
       },
       "style": {
+        "useImportType": "off",
         "useFilenamingConvention": "warn"
       },
       "suspicious": {
         "noConsoleLog": "warn"
       }
     }
+  },
+  "files": {
+    "ignore": ["dist/**", "node_modules/**", "coverage/**", ".next/**"]
   }
 }

@@ -1,0 +1,64 @@
+{
+  "name": "zymu",
+  "version": "0.0.0",
+  "description": "@zymuapp's sdk and tools for node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zymuapp/root.git",
+    "directory": "packages/node"
+  },
+  "bugs": {
+    "url": "https://github.com/zymuapp/root/issues"
+  },
+  "homepage": "https://docs.zymuapp.com/node",
+  "license": "MIT",
+  "keywords": [
+    "zymu",
+    "api",
+    "sdk",
+    "nodejs",
+    "typescript",
+    "javascript",
+    "rest",
+    "client"
+  ],
+  "files": ["dist", "README.md"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply .",
+    "format": "biome format .",
+    "format:fix": "biome format --write .",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^6.4.11",
+    "@nestjs/terminus": "^11.0.0",
+    "@swc/core": "^1.11.13",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "pathcat": "^1.4.0",
+    "redaxios": "^0.5.1",
+    "reflect-metadata": "^0.2.2",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "@anatine/esbuild-decorators": "^0.2.19",
+    "@biomejs/biome": "^1.9.4",
+    "@turbo/gen": "^2.4.4",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.10",
+    "@zymuapp/biome-config": "workspace:*",
+    "@zymuapp/testing": "workspace:*",
+    "@zymuapp/typescript-config": "workspace:*",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.0",
+    "typescript": "5.8.2"
+  }
+}

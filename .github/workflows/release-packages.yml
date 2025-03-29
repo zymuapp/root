@@ -22,7 +22,7 @@ permissions:
 jobs:
   release:
     name: Release Process
-    if: github.repository == 'zymuapp/zymu'
+    if: github.repository == 'zymuapp/root'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
