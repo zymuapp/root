@@ -101,7 +101,7 @@ jobs:
           title: "📦 Release ${{ env.PACKAGE_NAME }} packages (${{ env.RELEASE_DATE }})"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Output release summary
         if: steps.changesets.outputs.published == 'true'
