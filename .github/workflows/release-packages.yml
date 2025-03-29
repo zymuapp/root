@@ -97,7 +97,7 @@ jobs:
         with:
           publish: pnpm run release
           version: pnpm run version
-          commit: "🔖 release ${{ env.PACKAGE_NAME }} (${{ env.RELEASE_DATE }}) [run #${{ github.run_number }}]"
+          commit: "🔖 build: release ${{ env.PACKAGE_NAME }} (${{ env.RELEASE_DATE }}) [run #${{ github.run_number }}]"
           title: "📦 Release ${{ env.PACKAGE_NAME }} packages (${{ env.RELEASE_DATE }})"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
