@@ -1,6 +1,6 @@
 {
 	"name": "@zymuapp/testing",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "@zymuapp's tools for testing",
 	"repository": {
 		"type": "git",
@@ -13,7 +13,9 @@
 	"homepage": "https://docs.zymuapp.com/testing",
 	"license": "MIT",
 	"keywords": [],
-	"files": ["README.md"],
+	"files": [
+		"README.md"
+	],
 	"exports": {
 		"./config": "./jest.config.js"
 	},
