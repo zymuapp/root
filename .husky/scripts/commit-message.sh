@@ -117,7 +117,7 @@ typesRegex="$(printf "${separator}%s" "${types[@]}")"
 typesRegex="${typesRegex:${#separator}}"
 
 # Build full regex for commit validation
-regex="^(${emojiRegex}) (${typesRegex})(\(([a-z0-9-]+)\))?: (.+[a-z0-9(-)#@']{1,})$"
+regex="^(${emojiRegex}) (${typesRegex})(\(([a-z0-9-]+)\))?: (.+[a-z0-9(-)#@']{1,})([[-\]])?$"
 
 echo -e "${BLUE}═════════════════[ commit message validation ]═════════════════${NC}"
 echo ""
