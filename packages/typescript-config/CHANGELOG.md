@@ -1,5 +1,11 @@
 # @zymuapp/typescript-config
 
+## 0.2.0
+
+### Minor Changes
+
+- [#6](https://github.com/zymuapp/root/pull/6) [`572963a`](https://github.com/zymuapp/root/commit/572963a6fc3fdded96ad85a1c908fdfbdf786c3e) Thanks [@jerembdn](https://github.com/jerembdn)! - Update typescript rules
+
 ## 0.1.1
 
 ### Patch Changes
