@@ -101,6 +101,7 @@ types=(
   "build"    # Build system changes
   "ci"       # CI/CD changes
   "revert"   # Revert previous commits
+  "merge"    # Merge branches
 )
 
 # Build regex patterns
