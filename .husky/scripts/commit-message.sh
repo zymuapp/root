@@ -101,6 +101,7 @@ types=(
   "build"    # Build system changes
   "ci"       # CI/CD changes
   "revert"   # Revert previous commits
+  "merge"    # Merge branches
 )
 
 # Build regex patterns
@@ -117,7 +118,7 @@ typesRegex="$(printf "${separator}%s" "${types[@]}")"
 typesRegex="${typesRegex:${#separator}}"
 
 # Build full regex for commit validation
-regex="^(${emojiRegex}) (${typesRegex})(\(([a-z0-9-]+)\))?: (.+[a-z0-9(-)#@']{1,})$"
+regex="^(${emojiRegex}) (${typesRegex})(\(([a-z0-9-]+)\))?: (.+[a-z0-9(-)#@']{1,})([[-\]])?$"
 
 echo -e "${BLUE}═════════════════[ commit message validation ]═════════════════${NC}"
 echo ""
