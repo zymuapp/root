@@ -1,30 +1,30 @@
-import * as tonightpass from "tonightpass";
+import * as zymu from "zymu";
 
 declare module "@nestjs/common" {
-  export const Get: <Path extends tonightpass.PathsFor<"GET">>(
+  export const Get: <Path extends zymu.PathsFor<"GET">>(
     path: Path,
   ) => MethodDecorator;
 
   export const Post: <
-    Path extends Extract<tonightpass.Endpoints, { method: "POST" }>["path"],
+    Path extends Extract<zymu.Endpoints, { method: "POST" }>["path"],
   >(
     path: Path,
   ) => MethodDecorator;
 
   export const Put: <
-    Path extends Extract<tonightpass.Endpoints, { method: "PUT" }>["path"],
+    Path extends Extract<zymu.Endpoints, { method: "PUT" }>["path"],
   >(
     path: Path,
   ) => MethodDecorator;
 
   export const Patch: <
-    Path extends Extract<tonightpass.Endpoints, { method: "PATCH" }>["path"],
+    Path extends Extract<zymu.Endpoints, { method: "PATCH" }>["path"],
   >(
     path: Path,
   ) => MethodDecorator;
 
   export const Delete: <
-    Path extends Extract<tonightpass.Endpoints, { method: "DELETE" }>["path"],
+    Path extends Extract<zymu.Endpoints, { method: "DELETE" }>["path"],
   >(
     path: Path,
   ) => MethodDecorator;
