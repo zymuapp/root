@@ -164,12 +164,18 @@ importers:
         specifier: workspace:^
         version: link:../node
     devDependencies:
+      '@biomejs/biome':
+        specifier: ^1.9.4
+        version: 1.9.4
       '@nestjs/common':
         specifier: 10.4.15
         version: 10.4.15(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@types/node':
         specifier: 22.10.5
         version: 22.10.5
+      '@zymuapp/biome-config':
+        specifier: workspace:*
+        version: link:../biome-config
       typescript:
         specifier: ^5.0.0
         version: 5.8.2
@@ -247,9 +253,18 @@ importers:
         specifier: workspace:^
         version: link:../node
     devDependencies:
+      '@biomejs/biome':
+        specifier: ^1.9.4
+        version: 1.9.4
       '@types/react':
         specifier: ^19.0.0
         version: 19.0.10
+      '@zymuapp/biome-config':
+        specifier: workspace:*
+        version: link:../biome-config
+      '@zymuapp/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       react:
         specifier: ^19.0.0
         version: 19.0.0

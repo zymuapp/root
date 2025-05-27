@@ -35,7 +35,10 @@
     "react": "*"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@types/react": "^19.0.0",
+    "@zymuapp/biome-config": "workspace:*",
+    "@zymuapp/typescript-config": "workspace:*",
     "react": "^19.0.0",
     "typescript": "^5.0.0"
   }
