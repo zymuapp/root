@@ -1,0 +1,45 @@
+{
+  "name": "@zymuapp/react",
+  "version": "0.0.1",
+  "description": "@zymuapp react sdk.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zymuapp/root.git",
+    "directory": "packages/react"
+  },
+  "bugs": "https://github.com/zymuapp/root/issues",
+  "homepage": "https://zymuapp.com",
+  "license": "MIT",
+  "keywords": [
+    "zymuapp",
+    "react",
+    "hooks",
+    "components",
+    "typescript",
+    "javascript",
+    "sdk"
+  ],
+  "files": ["dist", "README.md"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "swr": "^2.2.5",
+    "zymu": "workspace:^"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/react": "^19.0.0",
+    "@zymuapp/biome-config": "workspace:*",
+    "@zymuapp/typescript-config": "workspace:*",
+    "react": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}

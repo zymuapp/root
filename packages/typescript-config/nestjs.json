@@ -2,12 +2,12 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./base.json",
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "NodeNext",
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node10",
+    "moduleResolution": "nodenext",
     "target": "ES2017",
     "sourceMap": true,
     "outDir": "./dist",
@@ -17,7 +17,8 @@
     "forceConsistentCasingInFileNames": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "strict": false
   },
   "exclude": ["dist", "__tests__", "**/*.test.ts"]
 }

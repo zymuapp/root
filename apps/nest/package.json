@@ -1,5 +1,5 @@
 {
-  "name": "@zymuapp/nest",
+  "name": "@zymuapp/apps-nest",
   "version": "0.0.1",
   "scripts": {
     "build": "nest build",
@@ -20,7 +20,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.1",
+    "@nestjs/common": "^11.0.16",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "reflect-metadata": "^0.2.2",
