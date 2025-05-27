@@ -1,5 +1,11 @@
 # zymu
 
+## 0.0.3
+
+### Patch Changes
+
+- [`af554da`](https://github.com/zymuapp/root/commit/af554da64785b39c57d7888ef7d0b732cdeb57ab) Thanks [@jerembdn](https://github.com/jerembdn)! - Update import
+
 ## 0.0.2
 
 ### Patch Changes
