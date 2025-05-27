@@ -1,5 +1,18 @@
 # @tonightpass/nest
 
+## 0.0.2
+
+### Patch Changes
+
+- [#11](https://github.com/zymuapp/root/pull/11) [`40e39a4`](https://github.com/zymuapp/root/commit/40e39a40f0a6de54b0f33e111ca2ee421ae7a2cd) Thanks [@jerembdn](https://github.com/jerembdn)! - Fix typescript config
+
+- [#11](https://github.com/zymuapp/root/pull/11) [`f6ca617`](https://github.com/zymuapp/root/commit/f6ca61738b504c05c5e303d3cd21be5e96b94f80) Thanks [@jerembdn](https://github.com/jerembdn)! - Update biome config schema version
+
+- [#10](https://github.com/zymuapp/root/pull/10) [`fc723ec`](https://github.com/zymuapp/root/commit/fc723ec8ce1a56c36169b30954873dc8db6df4d3) Thanks [@jerembdn](https://github.com/jerembdn)! - Add nest and react package, fix typescript config
+
+- Updated dependencies [[`40e39a4`](https://github.com/zymuapp/root/commit/40e39a40f0a6de54b0f33e111ca2ee421ae7a2cd), [`f6ca617`](https://github.com/zymuapp/root/commit/f6ca61738b504c05c5e303d3cd21be5e96b94f80), [`fc723ec`](https://github.com/zymuapp/root/commit/fc723ec8ce1a56c36169b30954873dc8db6df4d3)]:
+  - zymu@0.0.2
+
 ## 0.0.113
 
 ### Patch Changes
