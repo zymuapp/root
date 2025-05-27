@@ -1,5 +1,5 @@
 {
-  "name": "@zymuapp/nest",
+  "name": "@zymuapp/apps-nest",
   "version": "0.0.1",
   "scripts": {
     "build": "nest build",
