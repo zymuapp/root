@@ -1,6 +1,6 @@
 {
 	"name": "@zymuapp/testing",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "@zymuapp's tools for testing",
 	"repository": {
 		"type": "git",
