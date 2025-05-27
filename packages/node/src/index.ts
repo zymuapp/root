@@ -9,3 +9,5 @@ export * from "./types";
 export * from "./utils";
 
 export * from "./zymu";
+
+export type * from "pathcat";

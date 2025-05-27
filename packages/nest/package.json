@@ -1,0 +1,43 @@
+{
+  "name": "@zymuapp/nest",
+  "version": "0.0.1",
+  "description": "@zymuapp nest sdk.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zymuapp/root.git",
+    "directory": "packages/nest"
+  },
+  "bugs": "https://github.com/zymuapp/root/issues",
+  "homepage": "https://zymuapp.com",
+  "license": "MIT",
+  "keywords": [
+    "zymuapp",
+    "nestjs",
+    "typescript",
+    "backend",
+    "server",
+    "api",
+    "sdk"
+  ],
+  "files": ["dist", "README.md"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "pathcat": "^1.2.2",
+    "redaxios": "^0.5.1",
+    "zymu": "workspace:^"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=8.x.x"
+  },
+  "devDependencies": {
+    "@nestjs/common": "10.4.15",
+    "@types/node": "22.10.5",
+    "typescript": "^5.0.0"
+  }
+}
