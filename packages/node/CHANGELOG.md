@@ -1,5 +1,11 @@
 # zymu
 
+## 0.0.5
+
+### Patch Changes
+
+- Export formatResponse util function
+
 ## 0.0.4
 
 ### Patch Changes
