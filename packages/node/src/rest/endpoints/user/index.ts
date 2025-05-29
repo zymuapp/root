@@ -1,9 +1,8 @@
 import type { Endpoint } from "..";
 import type { DeepPartial, User, UserIdentifier } from "../../../types";
-import type { UpdateUserDto } from "../../dtos";
+import type { CreateUserDto, UpdateUserDto } from "../../dtos";
 
 export type UserEndpoints =
-  | Endpoint<"GET", "/users/search", User[], { q: string; limit?: number }>
   | Endpoint<"GET", "/users", User[]>
   | Endpoint<"GET", "/users/:userId", User>
   | Endpoint<"GET", "/users/@me", User>
@@ -17,4 +16,6 @@ export type UserEndpoints =
       },
       { identifier: boolean; suggestions?: boolean }
     >
-  | Endpoint<"PATCH", "/users/:userId", User, UpdateUserDto>;
+  | Endpoint<"POST", "/users", User, CreateUserDto>
+  | Endpoint<"PATCH", "/users/:userId", void, UpdateUserDto>
+  | Endpoint<"DELETE", "/users/:userId", void>;
