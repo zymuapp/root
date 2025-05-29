@@ -1,5 +1,11 @@
 # zymu
 
+## 0.0.6
+
+### Patch Changes
+
+- Update formatResponse util function to support asynchronous data
+
 ## 0.0.5
 
 ### Patch Changes
