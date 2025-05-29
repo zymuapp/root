@@ -1,10 +1,10 @@
 import type { Endpoint } from "..";
 import type { OAuthProvider, User } from "../../../types";
-import type { CreateUserDto, UserSignInDto } from "../../dtos";
+import type { UserSignInDto, UserSignUpDto } from "../../dtos";
 
 export type AuthEndpoints =
   // - Credentials
-  | Endpoint<"POST", "/auth/sign-up", User, CreateUserDto>
+  | Endpoint<"POST", "/auth/sign-up", User, UserSignUpDto>
   | Endpoint<"POST", "/auth/sign-in", User, UserSignInDto>
 
   // - Magic Link
