@@ -1,5 +1,11 @@
 # zymu
 
+## 0.0.4
+
+### Patch Changes
+
+- [#15](https://github.com/zymuapp/root/pull/15) [`53cd637`](https://github.com/zymuapp/root/commit/53cd637a4f8826b6714f083be1a7109f187f2734) Thanks [@jerembdn](https://github.com/jerembdn)! - Add users routes and move auth dtos
+
 ## 0.0.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @tonightpass/nest
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`53cd637`](https://github.com/zymuapp/root/commit/53cd637a4f8826b6714f083be1a7109f187f2734)]:
+  - zymu@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
