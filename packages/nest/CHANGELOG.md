@@ -1,5 +1,16 @@
 # @tonightpass/nest
 
+## 0.1.0
+
+### Minor Changes
+
+- [#22](https://github.com/zymuapp/root/pull/22) [`6bbe7de`](https://github.com/zymuapp/root/commit/6bbe7de2e8a62c6f01a00b27d689c588f76c7186) Thanks [@jerembdn](https://github.com/jerembdn)! - Add gRPC support to sdk
+
+### Patch Changes
+
+- Updated dependencies [[`6bbe7de`](https://github.com/zymuapp/root/commit/6bbe7de2e8a62c6f01a00b27d689c588f76c7186)]:
+  - zymu@0.1.0
+
 ## 0.0.6
 
 ### Patch Changes
