@@ -1,14 +1,14 @@
 import {
+  ErrorContext,
+  createGrpcError,
+  isGrpcError,
+} from "../../errors/grpc-errors";
+import {
   ErroredGrpcResponse,
   GrpcErrorCode,
   GrpcResponse,
   SucessfulGrpcResponse,
 } from "../../grpc";
-import {
-  ErrorContext,
-  createGrpcError,
-  isGrpcError,
-} from "../../errors/grpc-errors";
 
 /**
  * Creates a successful gRPC response
