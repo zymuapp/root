@@ -1,7 +1,6 @@
-import { DeepPartial } from "@mikro-orm/core";
 import type { EmptyRequest, EmptyResponse, Service } from ".";
 import { CreateUserDto, UpdateUserDto } from "../../rest";
-import { User, UserIdentifier } from "../../types";
+import { DeepPartial, User, UserIdentifier } from "../../types";
 
 export interface GetUserRequest {
   id: string;

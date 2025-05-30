@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.9
+
+### Patch Changes
+
+- Fix identifier partial type
+
 ## 0.1.8
 
 ### Patch Changes
