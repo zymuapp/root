@@ -65,8 +65,14 @@ message EmptyResponse {
 
 message GrpcResponse {
   bool success = 1;
-  google.protobuf.Any data = 2;
-  optional ErrorResponse error = 3;
+  oneof result {
+    DataWrapper data = 2;
+    ErrorResponse error = 3;
+  }
+}
+
+message DataWrapper {
+  google.protobuf.Any value = 1;
 }
 
 message ErrorResponse {
