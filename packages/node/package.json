@@ -22,11 +22,7 @@
     "rest",
     "client"
   ],
-  "files": [
-    "dist",
-    "README.md",
-    "src/protos"
-  ],
+  "files": ["dist", "README.md", "src/protos"],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
