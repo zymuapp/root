@@ -1,7 +1,7 @@
 import axios, { type Options, type Response } from "redaxios";
 
-import type { APIResponse, ErroredAPIResponse } from ".";
 import { isBrowser } from "../utils/is-browser";
+import { ErroredHttpResponse, HttpResponse } from "./client";
 
 const instance = axios.create({
   headers: {
@@ -37,12 +37,12 @@ const instance = axios.create({
   withCredentials: isBrowser,
 });
 
-export interface APIRequestOptions extends Options {}
+export interface HttpRequestOptions extends Options {}
 
 export const request = async <T>(url: string, options?: Options) => {
-  const response = instance<APIResponse<T>>(url, { ...options })
+  const response = instance<HttpResponse<T>>(url, { ...options })
     .then((response) => response)
-    .catch((error: Response<ErroredAPIResponse>) => {
+    .catch((error: Response<ErroredHttpResponse>) => {
       if (!error.data) {
         console.error(error);
       }

@@ -1,7 +1,7 @@
 import * as zymu from "zymu";
 
 declare module "@nestjs/common" {
-  export const Get: <Path extends zymu.PathsFor<"GET">>(
+  export const Get: <Path extends zymu.HttpPathsFor<"GET">>(
     path: Path,
   ) => MethodDecorator;
 
