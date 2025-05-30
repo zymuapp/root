@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.6
+
+### Patch Changes
+
+- Include protofiles to package output
+
 ## 0.1.5
 
 ### Patch Changes

@@ -12,6 +12,7 @@ const config: Options = {
   treeshake: true,
   dts: true,
   esbuildPlugins: [esbuildDecorators()],
+  publicDir: "src/protos",
 };
 
 export default defineConfig(config);
