@@ -10,6 +10,6 @@ export * from "./rest";
 export * from "./sdk";
 export * from "./types";
 export * from "./errors/grpc-errors";
-export * from "./utils/response/format-grpc-response";
+export * from "./utils";
 
 export type * from "pathcat";
