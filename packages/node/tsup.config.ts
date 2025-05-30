@@ -12,7 +12,7 @@ const config: Options = {
   treeshake: true,
   dts: true,
   esbuildPlugins: [esbuildDecorators()],
-  publicDir: "src/protos",
+  publicDir: "src/grpc/protos",
 };
 
 export default defineConfig(config);

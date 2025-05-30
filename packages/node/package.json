@@ -32,7 +32,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./protos/*": "./src/protos/*.proto"
+    "./protos/*": "./src/grpc/protos/*.proto"
   },
   "scripts": {
     "build": "tsup",
@@ -55,7 +55,7 @@
     "redaxios": "^0.5.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "stripe": "^17.7.0"
+    "stripe": "^18.2.0"
   },
   "devDependencies": {
     "@anatine/esbuild-decorators": "^0.2.19",
