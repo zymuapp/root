@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.13
+
+### Patch Changes
+
+- Move grpc errors folder
+
 ## 0.1.12
 
 ### Patch Changes

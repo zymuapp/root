@@ -25,7 +25,7 @@ export interface DeleteUserRequest {
   id: string;
 }
 
-interface CheckUserExistsResponse {
+export interface CheckUserExistsResponse {
   exists: boolean;
   identifier: DeepPartial<UserIdentifier>;
   suggestions?: string[];

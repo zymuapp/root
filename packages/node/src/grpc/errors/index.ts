@@ -1,4 +1,4 @@
-import { ErroredGrpcResponse, GrpcErrorCode, GrpcMetadata } from "../grpc";
+import { ErroredGrpcResponse, GrpcErrorCode, GrpcMetadata } from "../client";
 
 /**
  * Context interface for providing additional error information
