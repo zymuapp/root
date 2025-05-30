@@ -4,6 +4,47 @@ package common;
 
 import "google/protobuf/timestamp.proto";
 
+// Error codes enum
+enum GrpcErrorCode {
+  // Authentication errors
+  AUTH_INVALID_CREDENTIALS = 0;
+  AUTH_TOKEN_EXPIRED = 1;
+  AUTH_TOKEN_INVALID = 2;
+  AUTH_USER_NOT_FOUND = 3;
+  AUTH_UNAUTHORIZED = 4;
+  
+  // User management errors
+  USER_ALREADY_EXISTS = 100;
+  USER_INVALID_EMAIL = 101;
+  USER_INVALID_USERNAME = 102;
+  USER_WEAK_PASSWORD = 103;
+  USER_NOT_VERIFIED = 104;
+  
+  // Validation errors
+  VALIDATION_ERROR = 200;
+  INVALID_INPUT = 201;
+  MISSING_REQUIRED_FIELDS = 202;
+  
+  // Permission errors
+  FORBIDDEN = 300;
+  INSUFFICIENT_PERMISSIONS = 301;
+  
+  // Rate limiting
+  RATE_LIMITED = 400;
+  TOO_MANY_REQUESTS = 401;
+  
+  // Server errors
+  INTERNAL_ERROR = 500;
+  SERVICE_UNAVAILABLE = 501;
+  DATABASE_ERROR = 502;
+  EXTERNAL_SERVICE_ERROR = 503;
+  
+  // Resource errors
+  RESOURCE_NOT_FOUND = 600;
+  RESOURCE_CONFLICT = 601;
+  RESOURCE_EXPIRED = 602;
+}
+
 message BaseEntity {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
@@ -30,8 +71,9 @@ message GrpcResponse {
 }
 
 message ErrorResponse {
-  string message = 1;
-  map<string, StringArray> errors = 2;
+  GrpcErrorCode code = 1;
+  string message = 2;
+  map<string, StringArray> errors = 3;
 }
 
 message StringArray {

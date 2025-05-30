@@ -1,5 +1,5 @@
 import { DeepPartial } from "@mikro-orm/core";
-import type { EmptyResponse, Service } from ".";
+import type { EmptyRequest, EmptyResponse, Service } from ".";
 import { CreateUserDto, UpdateUserDto } from "../../rest";
 import { User, UserIdentifier } from "../../types";
 
@@ -17,7 +17,10 @@ export interface CheckUserExistsRequest {
 
 export interface CreateUserRequest extends CreateUserDto {}
 
-export interface UpdateUserRequest extends UpdateUserDto {}
+export interface UpdateUserRequest {
+  id: string;
+  data: UpdateUserDto;
+}
 
 export interface DeleteUserRequest {
   id: string;
@@ -32,6 +35,7 @@ interface CheckUserExistsResponse {
 export type UserResponse = User;
 
 export type UserServices =
+  | Service<"UserService", "GetUsers", EmptyRequest, UserResponse[]>
   | Service<"UserService", "GetUser", GetUserRequest, UserResponse>
   | Service<
       "UserService",

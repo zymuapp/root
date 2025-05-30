@@ -163,10 +163,15 @@ message CreateUserRequest {
   string password = 3;
 }
 
-message UpdateUserRequest {
+message UpdateUserData {
   optional common.UserIdentifier identifier = 1;
   optional common.UserIdentity identity = 2;
   optional string password = 3;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  UpdateUserData data = 2;
 }
 
 message DeleteUserRequest {
@@ -179,7 +184,12 @@ message CheckUserExistsResponse {
   repeated string suggestions = 3;
 }
 
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
 service UserService {
+  rpc GetUsers(common.EmptyRequest) returns (GetUsersResponse);
   rpc GetUser(GetUserRequest) returns (User);
   rpc GetUserByEmail(GetUserByEmailRequest) returns (User);
   rpc CheckUserExists(CheckUserExistsRequest) returns (CheckUserExistsResponse);

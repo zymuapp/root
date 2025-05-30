@@ -3,28 +3,34 @@ syntax = "proto3";
 package auth;
 
 import "common.proto";
+import "user.proto";
 
+// Sign Up Request - extends CreateUserDto
 message SignUpRequest {
   common.UserIdentifier identifier = 1;
   common.UserIdentity identity = 2;
   string password = 3;
 }
 
+// Sign In Request
 message SignInRequest {
-  string identifier = 1;
+  string identifier = 1;  // Can be email, username, or phone
   string password = 2;
 }
 
+// Refresh Token Request
 message RefreshTokenRequest {
   string refresh_token = 1;
 }
 
+// Authentication Response (for SignUp, SignIn, RefreshToken)
 message AuthResponse {
-  string user_id = 1;
+  user.User user = 1;
   string access_token = 2;
   string refresh_token = 3;
 }
 
+// Authentication Service
 service AuthService {
   rpc SignUp(SignUpRequest) returns (AuthResponse);
   rpc SignIn(SignInRequest) returns (AuthResponse);

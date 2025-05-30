@@ -1,5 +1,6 @@
 import type { EmptyRequest, EmptyResponse, Service } from ".";
 import { UserSignInDto, UserSignUpDto } from "../../rest";
+import { User } from "../../types";
 
 export interface SignUpRequest extends UserSignUpDto {}
 
@@ -10,7 +11,7 @@ export interface RefreshTokenRequest {
 }
 
 export interface AuthResponse {
-  userId: string;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }

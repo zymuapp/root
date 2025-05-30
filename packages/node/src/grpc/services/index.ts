@@ -1,9 +1,4 @@
-import {
-  GrpcMethodsFor,
-  GrpcRequestFor,
-  GrpcResponse,
-  GrpcResponseFor,
-} from "../client";
+import { GrpcMethodsFor, GrpcRequestFor, GrpcResponseFor } from "../client";
 import type { AuthServices } from "./auth";
 import type { UserServices } from "./user";
 
@@ -16,7 +11,7 @@ export type Service<
   service: ServiceName;
   method: Method;
   req: Req;
-  res: GrpcResponse<Res>;
+  res: Res;
 };
 
 export type ServiceClientInterface<S extends ServiceNames> = {
@@ -60,12 +55,18 @@ export interface AuthServiceClient
 export * from "./user";
 export interface UserServiceClient
   extends ServiceClientInterface<"UserService"> {
+  GetUsers(
+    request: GrpcRequestFor<"UserService", "GetUsers">,
+  ): Promise<GrpcResponseFor<"UserService", "GetUsers">>;
   GetUser(
     request: GrpcRequestFor<"UserService", "GetUser">,
   ): Promise<GrpcResponseFor<"UserService", "GetUser">>;
   GetUserByEmail(
     request: GrpcRequestFor<"UserService", "GetUserByEmail">,
   ): Promise<GrpcResponseFor<"UserService", "GetUserByEmail">>;
+  CheckUserExists(
+    request: GrpcRequestFor<"UserService", "CheckUserExists">,
+  ): Promise<GrpcResponseFor<"UserService", "CheckUserExists">>;
   CreateUser(
     request: GrpcRequestFor<"UserService", "CreateUser">,
   ): Promise<GrpcResponseFor<"UserService", "CreateUser">>;
