@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.7
+
+### Patch Changes
+
+- Import google protobuf any type
+
 ## 0.1.6
 
 ### Patch Changes
