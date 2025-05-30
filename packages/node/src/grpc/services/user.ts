@@ -28,7 +28,7 @@ export interface DeleteUserRequest {
 interface CheckUserExistsResponse {
   exists: boolean;
   identifier: DeepPartial<UserIdentifier>;
-  suggestions: string[];
+  suggestions?: string[];
 }
 
 export type UserResponse = User;
