@@ -42,7 +42,7 @@ export enum GrpcErrorCode {
 
 export type SucessfulGrpcResponse<T> = {
   success: true;
-  data: T;
+  payload: T;
 };
 
 export type ErroredGrpcResponse = {

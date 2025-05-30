@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.12
+
+### Patch Changes
+
+- Update grpcresponse payload
+
 ## 0.1.11
 
 ### Patch Changes

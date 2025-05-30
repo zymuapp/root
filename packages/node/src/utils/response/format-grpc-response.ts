@@ -48,7 +48,7 @@ export async function formatGrpcResponse<T>(
 
   return {
     success: true,
-    data: await Promise.resolve(dataOrCode as T | Promise<T>),
+    payload: await Promise.resolve(dataOrCode as T | Promise<T>),
   };
 }
 
