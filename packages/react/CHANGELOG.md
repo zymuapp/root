@@ -1,5 +1,12 @@
 # @tonightpass/react
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - zymu@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes

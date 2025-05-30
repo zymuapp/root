@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.4
+
+### Patch Changes
+
+- Update promises
+
 ## 0.1.3
 
 ### Patch Changes
