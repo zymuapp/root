@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.2
+
+### Patch Changes
+
+- Add errors
+
 ## 0.1.1
 
 ### Patch Changes

@@ -9,7 +9,7 @@ export * from "./grpc";
 export * from "./rest";
 export * from "./sdk";
 export * from "./types";
-export * from "./utils";
-export * from "./zymu";
+export * from "./errors/grpc-errors";
+export * from "./utils/response/format-grpc-response";
 
 export type * from "pathcat";
