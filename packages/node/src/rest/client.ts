@@ -1,15 +1,15 @@
 import { type ParamValue, type Query, pathcat } from "pathcat";
 import type { Options, Response as RedaxiosResponse } from "redaxios";
-import { type APIRequestOptions, request } from "..";
+import { type HttpRequestOptions, request } from "..";
 import { DEFAULT_API_URL } from "../constants";
 import type { Endpoints } from "./endpoints";
 
-export type SuccessfulAPIResponse<T> = {
+export type SuccessfulHttpResponse<T> = {
   success: true;
   data: T;
 };
 
-export type ErroredAPIResponse = {
+export type ErroredHttpResponse = {
   success: false;
   message: string;
   statusCode: number;
@@ -18,34 +18,34 @@ export type ErroredAPIResponse = {
   };
 };
 
-export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
+export type HttpResponse<T> = SuccessfulHttpResponse<T> | ErroredHttpResponse;
 
-export type PromisedAPIResponse<T> = Promise<APIResponse<T>>;
+export type PromisedHttpResponse<T> = Promise<HttpResponse<T>>;
 
-export type PathsFor<M extends Options["method"]> = Extract<
+export type HttpPathsFor<M extends Options["method"]> = Extract<
   Endpoints,
   { method: M }
 >["path"];
 
 export type ResponseFor<
   M extends Options["method"],
-  P extends PathsFor<M>,
+  P extends HttpPathsFor<M>,
 > = Extract<Endpoints, { method: M; path: P }>["res"];
 
 export type Response<
   M extends Options["method"],
-  P extends PathsFor<M>,
-> = APIResponse<Extract<Endpoints, { method: M; path: P }>["res"]>;
+  P extends HttpPathsFor<M>,
+> = HttpResponse<Extract<Endpoints, { method: M; path: P }>["res"]>;
 
-export type PromisedResponse<
+export type PromisedEndpointResponse<
   M extends Options["method"],
-  P extends PathsFor<M>,
-> = PromisedAPIResponse<Extract<Endpoints, { method: M; path: P }>["res"]>;
+  P extends HttpPathsFor<M>,
+> = PromisedHttpResponse<Extract<Endpoints, { method: M; path: P }>["res"]>;
 
-export type Body<M extends Options["method"], P extends PathsFor<M>> = Extract<
-  Endpoints,
-  { method: M; path: P }
->["body"];
+export type Body<
+  M extends Options["method"],
+  P extends HttpPathsFor<M>,
+> = Extract<Endpoints, { method: M; path: P }>["body"];
 
 export type StringifiedQueryValue = string | string[];
 
@@ -55,15 +55,15 @@ export type StringifiedQuery<T> = {
 
 export type QueryParams<
   M extends Options["method"],
-  P extends PathsFor<M>,
+  P extends HttpPathsFor<M>,
 > = StringifiedQuery<Extract<Endpoints, { method: M; path: P }>["body"]>;
 
-export class APIError<T> extends Error {
+export class HttpError<T> extends Error {
   public readonly status: number;
 
   constructor(
-    public readonly response: RedaxiosResponse<APIResponse<T>>,
-    public readonly data: ErroredAPIResponse,
+    public readonly response: RedaxiosResponse<HttpResponse<T>>,
+    public readonly data: ErroredHttpResponse,
   ) {
     super(data.message);
 
@@ -91,10 +91,10 @@ export class Client {
     this.options = options;
   }
 
-  async get<Path extends PathsFor<"GET">>(
+  async get<Path extends HttpPathsFor<"GET">>(
     path: Path,
     query?: Query<Path>,
-    options?: APIRequestOptions,
+    options?: HttpRequestOptions,
   ) {
     return this.requester<ResponseFor<"GET", Path>>(
       "GET",
@@ -105,11 +105,11 @@ export class Client {
     );
   }
 
-  async post<Path extends PathsFor<"POST">>(
+  async post<Path extends HttpPathsFor<"POST">>(
     path: Path,
     body: Body<"POST", Path>,
     query?: Query<Path>,
-    options?: APIRequestOptions,
+    options?: HttpRequestOptions,
   ) {
     return this.requester<ResponseFor<"POST", Path>>(
       "POST",
@@ -120,11 +120,11 @@ export class Client {
     );
   }
 
-  async put<Path extends PathsFor<"PUT">>(
+  async put<Path extends HttpPathsFor<"PUT">>(
     path: Path,
     body: Body<"PUT", Path>,
     query?: Query<Path>,
-    options?: APIRequestOptions,
+    options?: HttpRequestOptions,
   ) {
     return this.requester<ResponseFor<"PUT", Path>>(
       "PUT",
@@ -135,11 +135,11 @@ export class Client {
     );
   }
 
-  async patch<Path extends PathsFor<"PATCH">>(
+  async patch<Path extends HttpPathsFor<"PATCH">>(
     path: Path,
     body: Body<"PATCH", Path>,
     query?: Query<Path>,
-    options?: APIRequestOptions,
+    options?: HttpRequestOptions,
   ) {
     return this.requester<ResponseFor<"PATCH", Path>>(
       "PATCH",
@@ -150,11 +150,11 @@ export class Client {
     );
   }
 
-  async delete<Path extends PathsFor<"DELETE">>(
+  async delete<Path extends HttpPathsFor<"DELETE">>(
     path: Path,
     body: Body<"DELETE", Path>,
     query?: Query<Path>,
-    options?: APIRequestOptions,
+    options?: HttpRequestOptions,
   ) {
     return this.requester<ResponseFor<"DELETE", Path>>(
       "DELETE",
@@ -170,7 +170,7 @@ export class Client {
     path: string,
     body: unknown,
     query: Query<string> = {},
-    options: APIRequestOptions = {},
+    options: HttpRequestOptions = {},
   ) {
     const url = this.url(path, query);
 
@@ -180,7 +180,7 @@ export class Client {
       }
     }
 
-    const response: RedaxiosResponse<APIResponse<T>> = await request<T>(url, {
+    const response: RedaxiosResponse<HttpResponse<T>> = await request<T>(url, {
       method,
       data: body,
       ...options,
@@ -189,7 +189,7 @@ export class Client {
     const result = response.data;
 
     if (!result.success) {
-      throw new APIError<T>(response, result);
+      throw new HttpError<T>(response, result);
     }
 
     return result.data;

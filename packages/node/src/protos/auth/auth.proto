@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package auth;
-
-service AuthService {
-  rpc SignUp (SignUpRequest) returns (AuthResponse);
-  rpc SignIn (SignInRequest) returns (AuthResponse);
-  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
-}

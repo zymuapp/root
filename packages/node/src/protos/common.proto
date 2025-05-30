@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package common;
+
+import "google/protobuf/timestamp.proto";
+
+message BaseEntity {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+}
+
+message UpdatableBaseEntity {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}
+
+message EmptyRequest {
+}
+
+message EmptyResponse {
+}
+
+message GrpcResponse {
+  bool success = 1;
+  oneof result {
+    google.protobuf.Any data = 2;
+    ErrorResponse error = 3;
+  }
+}
+
+message ErrorResponse {
+  string message = 1;
+  map<string, StringArray> errors = 2;
+}
+
+message StringArray {
+  repeated string values = 1;
+}
+
+message UserIdentifier {
+  optional string email = 1;
+  optional string phone_number = 2;
+  string username = 3;
+  optional string stripe_customer_id = 4;
+}
+
+message UserIdentity {
+  string display_name = 1;
+  optional string first_name = 2;
+  optional string last_name = 3;
+  optional string bio = 4;
+  optional google.protobuf.Timestamp birth_date = 5;
+  optional string pronouns = 6;
+}
