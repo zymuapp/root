@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.8
+
+### Patch Changes
+
+- Update Promise with Observable for Services methods
+
 ## 0.1.7
 
 ### Patch Changes

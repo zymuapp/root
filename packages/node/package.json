@@ -1,6 +1,6 @@
 {
   "name": "zymu",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "@zymuapp's sdk and tools for node.js",
   "repository": {
     "type": "git",
@@ -22,7 +22,11 @@
     "rest",
     "client"
   ],
-  "files": ["dist", "README.md", "src/protos"],
+  "files": [
+    "dist",
+    "README.md",
+    "src/protos"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -54,6 +58,7 @@
     "pathcat": "^1.4.0",
     "redaxios": "^0.5.1",
     "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
     "stripe": "^17.7.0"
   },
   "devDependencies": {

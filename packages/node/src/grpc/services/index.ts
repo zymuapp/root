@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import {
   GrpcMethodsFor,
   GrpcRequestFor,
@@ -24,7 +25,7 @@ export type ServiceClientInterface<S extends ServiceNames> = {
     // @ts-ignore
     request: GrpcRequestFor<S, M>,
     // @ts-ignore
-  ) => Promise<GrpcResponseFor<S, M>>;
+  ) => Observable<GrpcResponseFor<S, M>>;
 };
 
 export type CreateServiceClientInterface<S extends ServiceNames> =
@@ -44,16 +45,16 @@ export interface AuthServiceClient
   extends ServiceClientInterface<"AuthService"> {
   SignUp(
     request: GrpcRequestFor<"AuthService", "SignUp">,
-  ): Promise<GrpcResponseFor<"AuthService", "SignUp">>;
+  ): Observable<GrpcResponseFor<"AuthService", "SignUp">>;
   SignIn(
     request: GrpcRequestFor<"AuthService", "SignIn">,
-  ): Promise<GrpcResponseFor<"AuthService", "SignIn">>;
+  ): Observable<GrpcResponseFor<"AuthService", "SignIn">>;
   SignOut(
     request: GrpcRequestFor<"AuthService", "SignOut">,
-  ): Promise<GrpcResponseFor<"AuthService", "SignOut">>;
+  ): Observable<GrpcResponseFor<"AuthService", "SignOut">>;
   RefreshToken(
     request: GrpcRequestFor<"AuthService", "RefreshToken">,
-  ): Promise<GrpcResponseFor<"AuthService", "RefreshToken">>;
+  ): Observable<GrpcResponseFor<"AuthService", "RefreshToken">>;
 }
 
 // - User
@@ -62,23 +63,23 @@ export interface UserServiceClient
   extends ServiceClientInterface<"UserService"> {
   GetUsers(
     request: GrpcRequestFor<"UserService", "GetUsers">,
-  ): Promise<GrpcResponseFor<"UserService", "GetUsers">>;
+  ): Observable<GrpcResponseFor<"UserService", "GetUsers">>;
   GetUser(
     request: GrpcRequestFor<"UserService", "GetUser">,
-  ): Promise<GrpcResponseFor<"UserService", "GetUser">>;
+  ): Observable<GrpcResponseFor<"UserService", "GetUser">>;
   GetUserByEmail(
     request: GrpcRequestFor<"UserService", "GetUserByEmail">,
-  ): Promise<GrpcResponseFor<"UserService", "GetUserByEmail">>;
+  ): Observable<GrpcResponseFor<"UserService", "GetUserByEmail">>;
   CheckUserExists(
     request: GrpcRequestFor<"UserService", "CheckUserExists">,
-  ): Promise<GrpcResponseFor<"UserService", "CheckUserExists">>;
+  ): Observable<GrpcResponseFor<"UserService", "CheckUserExists">>;
   CreateUser(
     request: GrpcRequestFor<"UserService", "CreateUser">,
-  ): Promise<GrpcResponseFor<"UserService", "CreateUser">>;
+  ): Observable<GrpcResponseFor<"UserService", "CreateUser">>;
   UpdateUser(
     request: GrpcRequestFor<"UserService", "UpdateUser">,
-  ): Promise<GrpcResponseFor<"UserService", "UpdateUser">>;
+  ): Observable<GrpcResponseFor<"UserService", "UpdateUser">>;
   DeleteUser(
     request: GrpcRequestFor<"UserService", "DeleteUser">,
-  ): Promise<GrpcResponseFor<"UserService", "DeleteUser">>;
+  ): Observable<GrpcResponseFor<"UserService", "DeleteUser">>;
 }
