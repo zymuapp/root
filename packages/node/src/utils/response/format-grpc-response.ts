@@ -1,7 +1,7 @@
 import {
-  GrpcResponse,
-  GrpcErrorCode,
   ErroredGrpcResponse,
+  GrpcErrorCode,
+  GrpcResponse,
   SucessfulGrpcResponse,
 } from "../../grpc";
 
