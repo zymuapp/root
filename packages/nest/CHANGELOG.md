@@ -1,5 +1,12 @@
 # @tonightpass/nest
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - zymu@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

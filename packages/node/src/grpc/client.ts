@@ -76,12 +76,12 @@ export type GrpcResponseFor<
 export type GrpcServiceResponse<
   S extends ServiceNames,
   M extends GrpcMethodsFor<S>,
-> = GrpcResponse<Extract<Services, { service: S; method: M }>["res"]>;
+> = Extract<Services, { service: S; method: M }>["res"];
 
 export type PromisedServiceResponse<
   S extends ServiceNames,
   M extends GrpcMethodsFor<S>,
-> = PromisedGrpcResponse<Extract<Services, { service: S; method: M }>["res"]>;
+> = Extract<Services, { service: S; method: M }>["res"];
 
 export interface GrpcMetadata {
   [key: string]: string | Buffer | string[] | Buffer[];

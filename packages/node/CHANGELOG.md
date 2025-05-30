@@ -1,5 +1,11 @@
 # zymu
 
+## 0.1.3
+
+### Patch Changes
+
+- Update promised grpc response
+
 ## 0.1.2
 
 ### Patch Changes

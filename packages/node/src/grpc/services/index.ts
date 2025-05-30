@@ -1,4 +1,9 @@
-import { GrpcMethodsFor, GrpcRequestFor, GrpcResponseFor } from "../client";
+import {
+  GrpcMethodsFor,
+  GrpcRequestFor,
+  GrpcResponse,
+  GrpcResponseFor,
+} from "../client";
 import type { AuthServices } from "./auth";
 import type { UserServices } from "./user";
 
@@ -11,7 +16,7 @@ export type Service<
   service: ServiceName;
   method: Method;
   req: Req;
-  res: Res;
+  res: GrpcResponse<Res>;
 };
 
 export type ServiceClientInterface<S extends ServiceNames> = {
