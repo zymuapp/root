@@ -4,36 +4,220 @@ package auth;
 
 import "common.proto";
 import "user.proto";
-
-// Sign Up Request - extends CreateUserDto
-message SignUpRequest {
-  common.UserIdentifier identifier = 1;
-  common.UserIdentity identity = 2;
-  string password = 3;
-}
-
-// Sign In Request
-message SignInRequest {
-  string identifier = 1;  // Can be email, username, or phone
-  string password = 2;
-}
-
-// Refresh Token Request
-message RefreshTokenRequest {
-  string refresh_token = 1;
-}
-
-// Authentication Response (for SignUp, SignIn, RefreshToken)
-message AuthResponse {
-  user.User user = 1;
-  string access_token = 2;
-  string refresh_token = 3;
-}
+import "google/protobuf/timestamp.proto";
 
 // Authentication Service
 service AuthService {
-  rpc SignUp(SignUpRequest) returns (AuthResponse);
-  rpc SignIn(SignInRequest) returns (AuthResponse);
-  rpc SignOut(common.EmptyRequest) returns (common.EmptyResponse);
-  rpc RefreshToken(RefreshTokenRequest) returns (AuthResponse);
+  rpc SignUp(SignUpRequest) returns (common.GrpcResponse);
+  rpc SignIn(SignInRequest) returns (common.GrpcResponse);
+  rpc SignOut(SignOutRequest) returns (common.GrpcResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (common.GrpcResponse);
+  rpc ValidateToken(ValidateTokenRequest) returns (common.GrpcResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (common.GrpcResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (common.GrpcResponse);
+  rpc VerifyEmail(VerifyEmailRequest) returns (common.GrpcResponse);
+  rpc ResendVerification(ResendVerificationRequest) returns (common.GrpcResponse);
+}
+
+// Sign up request with comprehensive user data
+message SignUpRequest {
+  UserIdentifierInput identifier = 1;
+  UserIdentityInput identity = 2;
+  string password = 3;
+  bool accept_terms = 4;
+  bool subscribe_newsletter = 5;
+  string referral_code = 6;
+  ClientInfo client_info = 7;
+}
+
+// Sign in request with multiple identifier options
+message SignInRequest {
+  oneof identifier {
+    string email = 1;
+    string username = 2;
+    string phone_number = 3;
+  }
+  string password = 4;
+  bool remember_me = 5;
+  ClientInfo client_info = 6;
+  string two_factor_token = 7;
+}
+
+message SignOutRequest {
+  string access_token = 1;
+  string refresh_token = 2;
+  bool sign_out_all_devices = 3;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  ClientInfo client_info = 2;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+  bool include_user_data = 2;
+}
+
+message ResetPasswordRequest {
+  oneof identifier {
+    string email = 1;
+    string username = 2;
+    string phone_number = 3;
+  }
+  string callback_url = 4;
+}
+
+message ChangePasswordRequest {
+  string current_password = 1;
+  string new_password = 2;
+  string access_token = 3;
+}
+
+message VerifyEmailRequest {
+  string verification_token = 1;
+  string email = 2;
+}
+
+message ResendVerificationRequest {
+  oneof identifier {
+    string email = 1;
+    string user_id = 2;
+  }
+  VerificationType verification_type = 3;
+}
+
+// User identifier input for registration
+message UserIdentifierInput {
+  optional string email = 1;
+  optional string phone_number = 2;
+  string username = 3;
+}
+
+// User identity input for registration
+message UserIdentityInput {
+  string display_name = 1;
+  optional string first_name = 2;
+  optional string last_name = 3;
+  optional string bio = 4;
+  optional google.protobuf.Timestamp birth_date = 5;
+  optional string pronouns = 6;
+}
+
+// Client information for tracking connections
+message ClientInfo {
+  string ip_address = 1;
+  string user_agent = 2;
+  DeviceInfo device = 3;
+  string timezone = 4;
+  common.Language preferred_language = 5;
+}
+
+message DeviceInfo {
+  string type = 1;
+  string brand = 2;
+  string model = 3;
+  OperatingSystem os = 4;
+  BrowserInfo browser = 5;
+}
+
+message OperatingSystem {
+  string name = 1;
+  string version = 2;
+}
+
+message BrowserInfo {
+  string name = 1;
+  string version = 2;
+}
+
+// Authentication response with tokens and user data
+message AuthResponse {
+  user.User user = 1;
+  TokenData tokens = 2;
+  SessionInfo session = 3;
+}
+
+message TokenData {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+  string token_type = 4;
+  repeated string scopes = 5;
+}
+
+message SessionInfo {
+  string session_id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp expires_at = 3;
+  DeviceInfo device = 4;
+  string ip_address = 5;
+}
+
+// Token validation response
+message TokenValidationResponse {
+  bool valid = 1;
+  string user_id = 2;
+  user.User user = 3;
+  repeated string scopes = 4;
+  google.protobuf.Timestamp expires_at = 5;
+}
+
+// Password reset response
+message PasswordResetResponse {
+  bool sent = 1;
+  string message = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+// Email verification response
+message EmailVerificationResponse {
+  bool verified = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp verified_at = 3;
+}
+
+// Two-factor authentication messages
+message TwoFactorSetupRequest {
+  string access_token = 1;
+  TwoFactorMethod method = 2;
+}
+
+message TwoFactorSetupResponse {
+  string secret = 1;
+  string qr_code_url = 2;
+  repeated string backup_codes = 3;
+}
+
+message TwoFactorVerifyRequest {
+  string access_token = 1;
+  string code = 2;
+  TwoFactorMethod method = 3;
+}
+
+message TwoFactorVerifyResponse {
+  bool verified = 1;
+  repeated string backup_codes = 4;
+}
+
+// Enums
+enum VerificationType {
+  EMAIL = 0;
+  PHONE = 1;
+  BOTH = 2;
+}
+
+enum TwoFactorMethod {
+  SMS = 0;
+  EMAIL = 1;
+  AUTHENTICATOR = 2;
+}
+
+enum AuthProvider {
+  LOCAL = 0;
+  GOOGLE = 1;
+  FACEBOOK = 2;
+  TWITTER = 3;
+  GITHUB = 4;
+  DISCORD = 5;
 }

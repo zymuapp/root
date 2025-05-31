@@ -2,23 +2,357 @@ syntax = "proto3";
 
 package user;
 
-import "google/protobuf/timestamp.proto";
 import "common.proto";
+import "google/protobuf/timestamp.proto";
 
-enum Currency {
-  EUR = 0;
-  USD = 1;
-  GBP = 2;
+// User Management Service
+service UserService {
+  rpc GetUsers(GetUsersRequest) returns (common.GrpcResponse);
+  rpc GetUser(GetUserRequest) returns (common.GrpcResponse);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (common.GrpcResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (common.GrpcResponse);
+  rpc CheckUserExists(CheckUserExistsRequest) returns (common.GrpcResponse);
+  rpc CreateUser(CreateUserRequest) returns (common.GrpcResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (common.GrpcResponse);
+  rpc UpdateUserProfile(UpdateUserProfileRequest) returns (common.GrpcResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (common.GrpcResponse);
+  rpc BanUser(BanUserRequest) returns (common.GrpcResponse);
+  rpc UnbanUser(UnbanUserRequest) returns (common.GrpcResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (common.GrpcResponse);
 }
 
-enum Language {
-  EN = 0;
-  DE = 1;
-  FR = 2;
-  ES = 3;
-  IT = 4;
+// Request messages
+message GetUsersRequest {
+  common.PaginationRequest pagination = 1;
+  common.FilterOptions filters = 2;
+  common.SortOptions sort = 3;
+  bool include_metadata = 4;
 }
 
+message GetUserRequest {
+  oneof identifier {
+    string user_id = 1;
+    string username = 2;
+  }
+  bool include_sensitive = 3;
+  bool include_metadata = 4;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+  bool include_sensitive = 2;
+  bool include_metadata = 3;
+}
+
+message GetUserProfileRequest {
+  string user_id = 1;
+  string requesting_user_id = 2;
+}
+
+message CheckUserExistsRequest {
+  string identifier = 1;
+  bool return_suggestions = 2;
+}
+
+message CreateUserRequest {
+  UserIdentifier identifier = 1;
+  UserIdentity identity = 2;
+  string password = 3;
+  UserRole role = 4;
+  UserSettings settings = 5;
+}
+
+message UpdateUserRequest {
+  string user_id = 1;
+  UpdateUserData data = 2;
+  bool partial_update = 3;
+}
+
+message UpdateUserProfileRequest {
+  string user_id = 1;
+  UserIdentity identity = 2;
+  repeated UserAddress addresses = 3;
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+  string reason = 2;
+  bool hard_delete = 3;
+}
+
+message BanUserRequest {
+  string user_id = 1;
+  string reason = 2;
+  google.protobuf.Timestamp ban_until = 3;
+  string banned_by = 4;
+}
+
+message UnbanUserRequest {
+  string user_id = 1;
+  string reason = 2;
+  string unbanned_by = 3;
+}
+
+message SearchUsersRequest {
+  string query = 1;
+  common.PaginationRequest pagination = 2;
+  SearchFilters filters = 3;
+}
+
+// Update data with oneofs for different update types
+message UpdateUserData {
+  oneof update_type {
+    UserIdentifier identifier = 1;
+    UserIdentity identity = 2;
+    UserSettings settings = 3;
+    PasswordUpdate password = 4;
+    RoleUpdate role = 5;
+  }
+}
+
+message PasswordUpdate {
+  string new_password = 1;
+  string current_password = 2;
+}
+
+message RoleUpdate {
+  UserRole role = 1;
+  string updated_by = 2;
+  string reason = 3;
+}
+
+// Response messages
+message GetUsersResponse {
+  repeated User users = 1;
+  common.PaginationResponse pagination = 2;
+}
+
+message CheckUserExistsResponse {
+  bool exists = 1;
+  UserIdentifier identifier = 2;
+  repeated string suggestions = 3;
+}
+
+message SearchUsersResponse {
+  repeated UserSearchResult results = 1;
+  common.PaginationResponse pagination = 2;
+  SearchStats stats = 3;
+}
+
+message UserSearchResult {
+  User user = 1;
+  float relevance_score = 2;
+  string match_reason = 3;
+}
+
+message SearchStats {
+  int32 total_matches = 1;
+  google.protobuf.Timestamp search_time = 2;
+  string search_id = 3;
+}
+
+// Core user types
+message User {
+  common.UpdatableBaseEntity base = 1;
+  UserIdentifier identifier = 2;
+  UserIdentity identity = 3;
+  UserRole role = 4;
+  repeated UserAddress addresses = 5;
+  UserCredentials credentials = 6;
+  UserSettings settings = 7;
+  repeated UserConnection connections = 8;
+  UserMetadata metadata = 9;
+  UserStatus status = 10;
+}
+
+message UserIdentifier {
+  optional string email = 1;
+  optional string phone_number = 2;
+  string username = 3;
+  string stripe_customer_id = 4;
+  map<string, string> external_ids = 5;
+}
+
+message UserIdentity {
+  // Profile information
+  string display_name = 1;
+  string bio = 2;
+  string avatar_url = 3;
+  string banner_url = 4;
+  
+  // Personal information
+  string first_name = 5;
+  string last_name = 6;
+  string full_name = 7;
+  string pronouns = 8;
+  google.protobuf.Timestamp birth_date = 9;
+  
+  // Social links
+  repeated SocialLink social_links = 10;
+}
+
+message SocialLink {
+  string platform = 1;
+  string url = 2;
+  bool verified = 3;
+}
+
+message UserAddress {
+  common.Location location = 1;
+  UserAddressType type = 2;
+  bool is_default = 3;
+  string label = 4;
+}
+
+message UserCredentials {
+  int32 version = 1;
+  string last_password = 2;
+  google.protobuf.Timestamp password_updated_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  bool two_factor_enabled = 5;
+  TwoFactorMethod two_factor_method = 6;
+}
+
+message UserSettings {
+  // General settings
+  common.Language language = 1;
+  common.Currency currency = 2;
+  string timezone = 3;
+  
+  // Privacy settings
+  bool allow_direct_messages = 4;
+  bool allow_mentions = 5;
+  bool allow_tagging = 6;
+  bool allow_tracking = 7;
+  bool profile_public = 8;
+  
+  // Notification settings
+  NotificationSettings notifications = 9;
+  
+  // Security settings
+  TwoFactorSettings two_factor_authentication = 10;
+}
+
+message NotificationSettings {
+  EmailNotifications email = 1;
+  PushNotifications push = 2;
+  bool digest_enabled = 3;
+  DigestFrequency digest_frequency = 4;
+}
+
+message EmailNotifications {
+  bool newsletter = 1;
+  bool messages = 2;
+  bool mentions = 3;
+  bool security_alerts = 4;
+}
+
+message PushNotifications {
+  bool messages = 1;
+  bool mentions = 2;
+  bool marketing = 3;
+}
+
+message TwoFactorSettings {
+  bool enabled = 1;
+  TwoFactorMethod method = 2;
+  repeated string backup_codes = 3;
+}
+
+message UserConnection {
+  string ip = 1;
+  OperatingSystem os = 2;
+  Device device = 3;
+  Client client = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message OperatingSystem {
+  string name = 1;
+  string version = 2;
+}
+
+message Device {
+  string type = 1;
+  string brand = 2;
+  string model = 3;
+}
+
+message Client {
+  string name = 1;
+  string version = 2;
+}
+
+message UserMetadata {
+  VerificationData verification = 1;
+  AnalyticsData analytics = 2;
+  ComplianceData compliance = 3;
+}
+
+message VerificationData {
+  EmailVerification email = 1;
+  PhoneVerification phone_number = 2;
+  IdentityVerification identity = 3;
+}
+
+message EmailVerification {
+  bool verified = 1;
+  google.protobuf.Timestamp verified_at = 2;
+  string verification_token = 3;
+  int32 attempts = 4;
+}
+
+message PhoneVerification {
+  bool verified = 1;
+  google.protobuf.Timestamp verified_at = 2;
+  string verification_code = 3;
+  int32 attempts = 4;
+}
+
+message IdentityVerification {
+  bool verified = 1;
+  google.protobuf.Timestamp verified_at = 2;
+  string verification_method = 3;
+  string document_type = 4;
+}
+
+message AnalyticsData {
+  google.protobuf.Timestamp last_login = 1;
+  google.protobuf.Timestamp last_activity = 2;
+  int32 login_count = 3;
+  string registration_source = 4;
+  string referral_code = 5;
+}
+
+message ComplianceData {
+  bool gdpr_consent = 1;
+  google.protobuf.Timestamp gdpr_consent_date = 2;
+  bool marketing_consent = 3;
+  google.protobuf.Timestamp marketing_consent_date = 4;
+  string data_processing_purposes = 5;
+}
+
+message UserStatus {
+  UserStatusType status = 1;
+  google.protobuf.Timestamp status_updated_at = 2;
+  optional string status_reason = 3;
+  optional google.protobuf.Timestamp ban_until = 4;
+  optional string banned_by = 5;
+}
+
+// Search filters
+message SearchFilters {
+  UserRole role = 1;
+  UserStatusType status = 2;
+  bool verified_only = 3;
+  google.protobuf.Timestamp created_after = 4;
+  google.protobuf.Timestamp created_before = 5;
+  common.Location location = 6;
+  repeated string tags = 7;
+}
+
+// Enums
 enum UserRole {
   USER = 0;
   MODERATOR = 1;
@@ -29,6 +363,17 @@ enum UserRole {
 enum UserAddressType {
   SHIPPING = 0;
   BILLING = 1;
+  WORK = 2;
+  HOME = 3;
+}
+
+enum UserStatusType {
+  ACTIVE = 0;
+  INACTIVE = 1;
+  SUSPENDED = 2;
+  BANNED = 3;
+  DELETED = 4;
+  PENDING_VERIFICATION = 5;
 }
 
 enum TwoFactorMethod {
@@ -37,163 +382,9 @@ enum TwoFactorMethod {
   AUTHENTICATOR = 2;
 }
 
-message Location {
-  string address = 1;
-  string zip_code = 2;
-  string city = 3;
-  string country = 4;
-}
-
-message UserAddress {
-  Location location = 1;
-  UserAddressType type = 2;
-  bool is_default = 3;
-}
-
-message UserCredentials {
-  int32 version = 1;
-  string last_password = 2;
-  google.protobuf.Timestamp password_updated_at = 3;
-  google.protobuf.Timestamp updated_at = 4;
-}
-
-message EmailNotifications {
-  bool newsletter = 1;
-  bool messages = 2;
-}
-
-message PushNotifications {
-  bool message = 1;
-}
-
-message NotificationSettings {
-  EmailNotifications email = 1;
-  PushNotifications push = 2;
-}
-
-message TwoFactorAuthentication {
-  bool enabled = 1;
-  TwoFactorMethod method = 2;
-}
-
-message UserSettings {
-  Language language = 1;
-  Currency currency = 2;
-  bool allow_direct_messages = 3;
-  bool allow_mentions = 4;
-  bool allow_tagging = 5;
-  bool allow_tracking = 6;
-  NotificationSettings notifications = 7;
-  TwoFactorAuthentication two_factor_authentication = 8;
-}
-
-message UserConnectionOS {
-  string name = 1;
-  string version = 2;
-}
-
-message UserConnectionDevice {
-  string type = 1;
-  string brand = 2;
-}
-
-message UserConnectionClient {
-  string name = 1;
-  string version = 2;
-}
-
-message UserConnection {
-  string ip = 1;
-  UserConnectionOS os = 2;
-  UserConnectionDevice device = 3;
-  UserConnectionClient client = 4;
-  google.protobuf.Timestamp updated_at = 5;
-  google.protobuf.Timestamp created_at = 6;
-}
-
-message EmailVerification {
-  bool verified = 1;
-  optional google.protobuf.Timestamp verified_at = 2;
-}
-
-message PhoneVerification {
-  bool verified = 1;
-  optional google.protobuf.Timestamp verified_at = 2;
-}
-
-message VerificationInfo {
-  EmailVerification email = 1;
-  PhoneVerification phone_number = 2;
-}
-
-message UserMetadata {
-  VerificationInfo verification = 1;
-}
-
-message User {
-  string id = 1;
-  google.protobuf.Timestamp created_at = 2;
-  google.protobuf.Timestamp updated_at = 3;
-  common.UserIdentifier identifier = 4;
-  string password = 5;
-  common.UserIdentity identity = 6;
-  UserRole role = 7;
-  repeated UserAddress addresses = 8;
-  UserCredentials credentials = 9;
-  UserSettings settings = 10;
-  repeated UserConnection connections = 11;
-  UserMetadata metadata = 12;
-}
-
-message GetUserRequest {
-  string id = 1;
-}
-
-message GetUserByEmailRequest {
-  string email = 1;
-}
-
-message CheckUserExistsRequest {
-  string identifier = 1;
-}
-
-message CreateUserRequest {
-  common.UserIdentifier identifier = 1;
-  common.UserIdentity identity = 2;
-  string password = 3;
-}
-
-message UpdateUserData {
-  optional common.UserIdentifier identifier = 1;
-  optional common.UserIdentity identity = 2;
-  optional string password = 3;
-}
-
-message UpdateUserRequest {
-  string id = 1;
-  UpdateUserData data = 2;
-}
-
-message DeleteUserRequest {
-  string id = 1;
-}
-
-message CheckUserExistsResponse {
-  bool exists = 1;
-  common.UserIdentifier identifier = 2;
-  repeated string suggestions = 3;
-}
-
-message GetUsersResponse {
-  repeated User users = 1;
-}
-
-service UserService {
-  rpc GetUsers(common.EmptyRequest) returns (GetUsersResponse);
-  rpc GetUser(GetUserRequest) returns (User);
-  rpc GetUserByEmail(GetUserByEmailRequest) returns (User);
-  rpc CheckUserExists(CheckUserExistsRequest) returns (CheckUserExistsResponse);
-  rpc CreateUser(CreateUserRequest) returns (User);
-  rpc UpdateUser(UpdateUserRequest) returns (common.EmptyResponse);
-  rpc DeleteUser(DeleteUserRequest) returns (common.EmptyResponse);
+enum DigestFrequency {
+  DAILY = 0;
+  WEEKLY = 1;
+  MONTHLY = 2;
+  NEVER = 3;
 }
