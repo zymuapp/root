@@ -1,6 +1,4 @@
-# Project Title (Replace with actual project title)
-
-(Replace with a brief description of the project and its purpose)
+# [@zymuapp](https://github.com/zymuapp)'s root
 
 ## Monorepo Structure
 
