@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@nestjs/common": "10.4.15",
+    "@nestjs/common": "10.4.16",
     "@types/node": "22.10.5",
     "@zymuapp/biome-config": "workspace:*",
     "typescript": "^5.0.0"
