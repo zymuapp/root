@@ -46,7 +46,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@mikro-orm/core": "^6.4.11",
+    "@mikro-orm/core": "^6.6.10",
     "@nestjs/terminus": "^11.0.0",
     "@swc/core": "^1.11.13",
     "class-transformer": "^0.5.1",
